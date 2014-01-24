@@ -23,14 +23,24 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/about', function(request, response) {
+    response.json({
+        full_name: "Junhee Woo",
+        first_name: "Junhee",
+        middle_name: "June",
+        last_name: "Woo",
+        birth_year: 1984,
+        birth_month: 8,
+        birth_day: 26
+    });
+});
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Woozet\'s API server listening on port ' + app.get('port'));
 });
